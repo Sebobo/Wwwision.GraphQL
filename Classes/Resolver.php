@@ -110,9 +110,13 @@ final class Resolver
                 $type = $type->getWrappedType();
             }
             $argumentType = $type->name . 's';
+        } else {
+            $argumentType = $type->name;
         }
         if (str_ends_with($argumentType, 'Input')) {
             $argumentType = substr($argumentType, 0, -5);
+        } elseif (str_ends_with($argumentType, 'Inputs')) {
+            $argumentType = substr($argumentType, 0, -6) . 's';
         }
 
         $className = $this->resolveClassName($argumentType);
